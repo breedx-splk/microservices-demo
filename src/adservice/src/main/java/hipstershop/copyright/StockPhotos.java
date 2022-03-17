@@ -17,6 +17,7 @@ public class StockPhotos {
 
     boolean isCopyright(Demo.Ad ad){
         boolean result = true;
+        logger.info("Copyright check");
         long start = System.currentTimeMillis();
         for (CopyrightPhoto photo : photos) {
             if(photo.matchesAd(ad)){

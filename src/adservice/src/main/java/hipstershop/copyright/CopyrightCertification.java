@@ -20,7 +20,7 @@ public class CopyrightCertification {
     public List<hipstershop.Demo.Ad> certify(String category, List<hipstershop.Demo.Ad> ads) {
         if(!enabled){
             return ads;
-        }
+         }
         Certifier certifier = certifiers.get(category);
         return certifier.certify(ads);
     }

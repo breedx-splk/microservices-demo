@@ -28,16 +28,8 @@ spec:
       terminationGracePeriodSeconds: 5
       tolerations:
       nodeSelector:
-      initContainers:
-        - name: sfx-instrumentation
-          image: quay.io/signalfuse/sfx-zero-config-agent:latest
-          # image: sfx-zero-config-agent
-          # imagePullPolicy: Never
-          volumeMounts:
-            - mountPath: /opt/sfx/
-              name: sfx-instrumentation
       containers:
-        - name: server
+        - name: adserver
           image: adservice
           ports:
             - containerPort: 9555
@@ -50,13 +42,20 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
+            - name: OTEL_PROPAGATORS
+              value: "b3multi" 
             - name: OTEL_EXPORTER
               value: otlp
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: http://$(NODE_IP):4317
-          volumeMounts:
-            - mountPath: /opt/sfx
-              name: sfx-instrumentation
+            - name: SPLUNK_PROFILER_ENABLED
+              value: "true"
+            - name: SPLUNK_PROFILER_MEMORY_ENABLED
+              value: "true"   
+            - name: ENABLE_COPYRIGHT_CERTIFICATION
+              value: "true"
+            - name: JAVA_TOOL_OPTIONS
+              value: -javaagent:/opt/sfx/splunk-otel-javaagent-all.jar
           resources:
             requests:
               cpu: 200m
