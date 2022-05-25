@@ -54,6 +54,8 @@ spec:
               value: "true"   
             - name: ENABLE_COPYRIGHT_CERTIFICATION
               value: "true"
+            - name: "STOCK_PHOTO_MAX_FINGERPRINT_SIZE"
+              value; 100000  
             - name: JAVA_TOOL_OPTIONS
               value: -javaagent:/opt/sfx/splunk-otel-javaagent-all.jar
           resources:

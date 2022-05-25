@@ -47,6 +47,7 @@ public class StockPhotos {
 
         public CopyrightPhoto(String id) {
             this.id = id;
+            logger.info("photo size selected : %d",MAX_FINGERPRINT_SIZE);   
             photoFingerprint = new byte[new Random().nextInt(MAX_FINGERPRINT_SIZE)];
         }
 
