@@ -45,9 +45,12 @@ public class StockPhotos {
         private final byte[] photoFingerprint;
         private static final int MAX_FINGERPRINT_SIZE = Integer.parseInt(System.getenv().getOrDefault("STOCK_PHOTO_MAX_FINGERPRINT_SIZE", "1000000"));
 
+        static {
+            logger.info("photo size selected : {}", MAX_FINGERPRINT_SIZE);
+        }
+
         public CopyrightPhoto(String id) {
             this.id = id;
-            logger.info("photo size selected : %d",MAX_FINGERPRINT_SIZE);   
             photoFingerprint = new byte[new Random().nextInt(MAX_FINGERPRINT_SIZE)];
         }
 
