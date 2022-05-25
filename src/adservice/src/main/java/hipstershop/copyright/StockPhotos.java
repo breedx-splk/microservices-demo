@@ -2,6 +2,7 @@ package hipstershop.copyright;
 
 import hipstershop.AdService;
 import hipstershop.Demo;
+import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,14 +13,13 @@ import java.util.List;
 public class StockPhotos {
 
     private final static long MAX_TIME_MS = 6500;
-    private final static List<CopyrightPhoto> photos = createDatabase();
     private static final Logger logger = LogManager.getLogger(AdService.class);
 
     boolean isCopyright(Demo.Ad ad){
         boolean result = true;
         logger.info("Copyright check");
         long start = System.currentTimeMillis();
-        for (CopyrightPhoto photo : photos) {
+        for (CopyrightPhoto photo : createDatabase()) {
             if(photo.matchesAd(ad)){
                 result = false;
             }
@@ -42,15 +42,17 @@ public class StockPhotos {
     static class CopyrightPhoto {
 
         private final String id;
+        private final byte[] photoFingerprint;
 
         public CopyrightPhoto(String id) {
             this.id = id;
+            photoFingerprint = new byte[new Random().nextInt(1_000_000)];
         }
 
         public boolean matchesAd(Demo.Ad ad) {
             boolean matches = false;
-            for (CopyrightPhoto photo : photos) {
-                if(photo.id.equals(ad.getRedirectUrl())){
+            for (CopyrightPhoto photo : createDatabase()) {
+                if(photo.id.equals(ad.getRedirectUrl())) {
                     matches = true;
                 }
             }
