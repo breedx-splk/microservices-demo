@@ -46,7 +46,7 @@ public class StockPhotos {
 
         public CopyrightPhoto(String id) {
             this.id = id;
-            photoFingerprint = new byte[new Random().nextInt(1_000_000)];
+            photoFingerprint = new byte[new Random().nextInt(500_000)];
         }
 
         public boolean matchesAd(Demo.Ad ad) {
