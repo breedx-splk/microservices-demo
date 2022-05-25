@@ -43,10 +43,11 @@ public class StockPhotos {
 
         private final String id;
         private final byte[] photoFingerprint;
+        private static final int MAX_FINGERPRINT_SIZE = Integer.parseInt(System.getenv().getOrDefault("STOCK_PHOTO_MAX_FINGERPRINT_SIZE", "1000000"));
 
         public CopyrightPhoto(String id) {
             this.id = id;
-            photoFingerprint = new byte[new Random().nextInt(500_000)];
+            photoFingerprint = new byte[new Random().nextInt(MAX_FINGERPRINT_SIZE)];
         }
 
         public boolean matchesAd(Demo.Ad ad) {
