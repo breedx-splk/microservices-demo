@@ -45,7 +45,7 @@ dependencies {
                 "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
                 "io.netty:netty-tcnative-boringssl-static:2.0.43.Final"
 
-        javaagent "com.splunk:splunk-otel-javaagent:1.6.0:all"
+        javaagent "com.splunk:splunk-otel-javaagent:1.11.0:all"
     }
 }
 
